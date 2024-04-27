@@ -1,4 +1,6 @@
 import {useState} from "react";
+import handleDecimal from "@/components/conversions/twosutil/decimal";
+import handleTwosComplement from "@/components/conversions/twosutil/twoscomplement";
 
 export default function ComplementConversion() {
 
@@ -19,7 +21,29 @@ export default function ComplementConversion() {
     }
 
     const handleConvert = () => {
+        if (inputState == "Decimal") {
+            console.log(input)
+            let op = handleDecimal(input);
 
+            if (op == "error") {
+                setErrorState(true);
+                return;
+            }
+            setErrorState(false)
+            setOutput(op)
+
+        } else {
+            console.log(input)
+
+            let op = handleTwosComplement(input)
+            if (op == "error") {
+                setErrorState(true);
+                return;
+            }
+            setErrorState(false)
+            setOutput(op)
+
+        }
     }
 
 
@@ -53,7 +77,7 @@ export default function ComplementConversion() {
                 </button>
                 <div className={"flex-col flex "}>
                     <input
-                        className="rounded-lg text-xl p-2 bg-slate-700 text-white"
+                        className="rounded-lg text-xl p-2 bg-slate-700 text-white "
                         type="text"
                         placeholder={outputState + " Value"}
                         value={output}
@@ -61,6 +85,7 @@ export default function ComplementConversion() {
                     />
                 </div>
             </div>
+            <p className={"font-mono"}>Two's complement limited to 8 bit</p>
             <p className={`text-red-500 text-lg ${errorState ? 'visible' : 'invisible'}`}>Invalid {inputState} value.</p>
         </div>
     )
