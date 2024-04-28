@@ -9,8 +9,6 @@ const convertAssemblyToInstruction: (input: string, targetAddress: string, instr
 
     let op = "";
 
-    console.log("full thing:" + input + " " + targetAddress + " " + instructionAddress + " " + isDecimalAddress)
-
     if (!isDecimalAddress) {
         if (targetAddress.startsWith("0x")) targetAddress = targetAddress.substring(2);
         if (instructionAddress.startsWith("0x")) instructionAddress = instructionAddress.substring(2);
@@ -25,7 +23,6 @@ const convertAssemblyToInstruction: (input: string, targetAddress: string, instr
     let terms = input.split(" ");
     let instruction: OpcodeKey = terms[0] as OpcodeKey;
     let instructionCode: string = opcodes[instruction];
-    console.log(instructionCode);
 
     op += instructionCode;
 
@@ -60,7 +57,6 @@ const convertAssemblyToInstruction: (input: string, targetAddress: string, instr
         let offset = Math.floor((targetAddr - currentAddress - 4) / 4);
 
         let offsetBinary = (offset < 0) ? ((offset + (1 << 16)) & ((1 << 16) - 1)).toString(2) : offset.toString(2).padStart(16, '0');
-        console.log("Offset:", offset);
 
         op += offsetBinary;
     } else {
@@ -87,7 +83,7 @@ const convertAssemblyToInstruction: (input: string, targetAddress: string, instr
     if (!isDecimalAddress) {
         op = "0x" + parseInt(op, 2).toString(16);
     }
-    console.log("Complete operation code:", op);
+
     return op;
 };
 
