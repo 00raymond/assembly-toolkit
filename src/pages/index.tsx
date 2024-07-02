@@ -18,8 +18,8 @@ export default function Home() {
               <meta name="author" content="Raymond House" />
               <link rel="icon" href={"/g15660.svg"} />
           </Head>
-        <main className={"w-screen h-screen flex flex-col justify-center items-center space-y-3 "}>
-          <div className={"flex flex-col space-y-4 p-16 pb-8 pt-32 transition-all duration-200"}>
+        <main className={"w-screen h-screen flex flex-col  items-center space-y-3 "}>
+          <div className={"flex flex-col space-y-4 p-16 pb-8 transition-all duration-200"}>
               <Convert />
               <ComplementConversion />
               <MachineInstruct />
